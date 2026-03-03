@@ -100,13 +100,13 @@ async function analyze() {
     try {
       const r = await fetch(pick(base, '/robots.txt'));
       robotsOk = r.ok;
-    } catch(e) {}
+    } catch (e) { }
 
     let sitemapOk = false;
     try {
       const s = await fetch(pick(base, '/sitemap.xml'));
       sitemapOk = s.ok;
-    } catch(e) {}
+    } catch (e) { }
 
     const wordCountNum = result.text.split(/\s+/).filter(w => w.length > 0).length;
     const hasSocialLinks = /linkedin\.com|twitter\.com|facebook\.com|instagram\.com/i.test(result.html);
@@ -199,8 +199,11 @@ function renderResults(payload) {
 
     item.innerHTML = `
       <div class="item-head">
-        <div>
-          <h3>${check.title}</h3>
+        <div class="item-info">
+          <div class="title-row">
+            ${iconSvg}
+            <h3>${check.title}</h3>
+          </div>
           <p>${check.desc}</p>
         </div>
         <span class="pill ${data.status}">${statusLabel}</span>
