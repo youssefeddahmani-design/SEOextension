@@ -84,13 +84,13 @@ async function analyze() {
     try {
       const r = await fetch(pick(base, '/robots.txt'));
       robotsOk = r.ok;
-    } catch(e) {}
+    } catch (e) { }
 
     let sitemapOk = false;
     try {
       const s = await fetch(pick(base, '/sitemap.xml'));
       sitemapOk = s.ok;
-    } catch(e) {}
+    } catch (e) { }
 
     // Lógica de validación previa al Payload
     const wordCountNum = result.text.split(/\s+/).filter(w => w.length > 0).length;
@@ -194,7 +194,26 @@ function renderResults(payload, host) {
 
   const finalScore = Math.round((score / maxScore) * 100);
   scoreEl.textContent = finalScore;
-  scoreTextEl.textContent = finalScore >= 80 ? 'Muy bien' : (finalScore >= 60 ? 'Aceptable' : 'A mejorar');
+
+  let moodText = '';
+  if (finalScore >= 90) {
+    moodText = '¡Menudo jefe! Tu SEO está tan limpio que da crema. Pura élite. 😎';
+    scoreTextEl.style.color = '#22c55e';
+  } else if (finalScore >= 80) {
+    moodText = 'Oye, ni tan mal. Te lo has currado, pero no te flipes que siempre hay algo que rascar. 🚀';
+    scoreTextEl.style.color = '#22c55e';
+  } else if (finalScore >= 60) {
+    moodText = 'A ver, cumple, pero esto es un poco de principiante. Dale una vuelta si no quieres ser un "don nadie". 🛠️';
+    scoreTextEl.style.color = '#eab308';
+  } else if (finalScore >= 40) {
+    moodText = 'Madre mía... Esto está más flojo que un muelle de guita. O espabilas o te comen en Google. ⚠️';
+    scoreTextEl.style.color = '#f97316';
+  } else {
+    moodText = '¡Vaya tela! Esto es un desastre total. ¿Quieres hundir la web o qué? ¡Ponte a currar ya! 🛑';
+    scoreTextEl.style.color = '#ef4444';
+  }
+
+  scoreTextEl.textContent = moodText;
 }
 
 async function highlightMissingAlt() {
