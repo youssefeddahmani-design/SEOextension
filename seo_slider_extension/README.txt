@@ -38,3 +38,6 @@ Notas
 - Algunas webs pueden bloquear parte del análisis.
 - La comprobación de Google Analytics, anuncios o accesibilidad es orientativa.
 - Google Indexación, Bing Webmaster real o pruebas en varios navegadores requieren revisión manual.
+
+
+MODIFICADO POR VITALII
